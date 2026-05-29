@@ -191,7 +191,7 @@ async function createRolesPanel(channel) {
 // CREATE SELECT MENU ROLES PANEL (Dropdown version)
 // ============================================
 async function createSelectRolesPanel(channel) {
-    const GIF_URL = "https://media.tenor.com/4TcHv3ZRwXgAAAAC/gaming.gif";
+    const GIF_URL = "https://images-ext-1.discordapp.net/external/_LdcZiTLV-b3ppxLLcVRVN0qyjA1_ni8NDiAZpOTYHA/https/i.imgur.com/IAzRQrM.gif";
     
     const embed = new EmbedBuilder()
         .setTitle("🎮 **GAME ROLES** 🎮")
