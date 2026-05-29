@@ -30,42 +30,42 @@ const client = new Client({
 // ============================================
 const GAME_ROLES = [
     { 
-        id: "ROLE_ID_1",  // حط هنا الرول ديال FreeFire
+        id: "1508204668449329272",  // حط هنا الرول ديال FreeFire
         name: "FreeFire", 
         emoji: "🔥", 
         description: "FreeFire player",
         color: "#FF4655"
     },
     { 
-        id: "ROLE_ID_2",  // حط هنا الرول ديال Minecraft
+        id: "1508204622924353556",  // حط هنا الرول ديال Minecraft
         name: "Minecraft", 
         emoji: "⛏️", 
         description: "Minecraft player",
         color: "#44AA44"
     },
     { 
-        id: "ROLE_ID_3",  // حط هنا الرول ديال Roblox
+        id: "1508204961937494016",  // حط هنا الرول ديال Roblox
         name: "Roblox", 
         emoji: "🎮", 
         description: "Roblox player",
         color: "#EE4444"
     },
     { 
-        id: "ROLE_ID_4",  // حط هنا الرول ديال Valorant
+        id: "1508204882795036702",  // حط هنا الرول ديال Valorant
         name: "Valorant", 
         emoji: "🎯", 
         description: "Valorant player",
         color: "#FD4556"
     },
     { 
-        id: "ROLE_ID_5",  // حط هنا الرول ديال League of Legends
+        id: "1508205150915788901",  // حط هنا الرول ديال League of Legends
         name: "League of Legends", 
         emoji: "🏆", 
         description: "LoL player",
         color: "#0AC8B9"
     },
     { 
-        id: "ROLE_ID_6",  // حط هنا الرول ديال Fortnite
+        id: "1508205045718454422",  // حط هنا الرول ديال Fortnite
         name: "Fortnite", 
         emoji: "🔫", 
         description: "Fortnite player",
