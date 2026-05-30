@@ -25,44 +25,74 @@ const client = new Client({
 });
 
 // ============================================
-// ROLES CONFIGURATION - الرولات ديالك
+// ROLES CONFIGURATION - جميع الرولات
 // ============================================
 const GAME_ROLES = [
     { 
-        id: "1508204668449329272",  // FreeFire
-        name: "FreeFire", 
-        emoji: "🔥", 
-        label: "FreeFire"
+        id: "1508204668449329272",  // Free fire
+        name: "Free Fire", 
+        emoji: "☄️", 
+        label: "Free fire"
     },
     { 
         id: "1508204622924353556",  // Minecraft
         name: "Minecraft", 
-        emoji: "⛏️", 
+        emoji: "🔨", 
         label: "Minecraft"
     },
     { 
         id: "1508204961937494016",  // Roblox
         name: "Roblox", 
-        emoji: "🎮", 
+        emoji: "⬛️", 
         label: "Roblox"
     },
     { 
         id: "1508204882795036702",  // Valorant
         name: "Valorant", 
-        emoji: "🎯", 
+        emoji: "👾", 
         label: "Valorant"
     },
     { 
         id: "1508205150915788901",  // League of Legends
         name: "League of Legends", 
-        emoji: "🏆", 
-        label: "League of legends"
+        emoji: "🚀", 
+        label: "League of Legends"
     },
     { 
-        id: "1508205045718454422",  // Fortnite
-        name: "Fortnite", 
-        emoji: "🔫", 
-        label: "Fortnite"
+        id: "1508205045718454422",  // Fortnite (Cs Go)
+        name: "CS:GO", 
+        emoji: "🔱", 
+        label: "Cs Go"
+    },
+    { 
+        id: "1508205098692513983",  // Stumble
+        name: "Stumble Guys", 
+        emoji: "✨", 
+        label: "Stumble"
+    },
+    { 
+        id: "1508204989674160178",  // Among Us
+        name: "Among Us", 
+        emoji: "👀", 
+        label: "Among us"
+    },
+    { 
+        id: "1508204921835749558",  // GTA
+        name: "GTA", 
+        emoji: "💥", 
+        label: "Gta"
+    },
+    { 
+        id: "1508204796346368011",  // PES
+        name: "PES", 
+        emoji: "⚽️", 
+        label: "Pes"
+    },
+    { 
+        id: "1508204684299604028",  // Chess
+        name: "Chess", 
+        emoji: "🖤", 
+        label: "Chess"
     }
 ];
 
@@ -113,50 +143,46 @@ async function toggleRole(interaction, roleId, roleName) {
 }
 
 // ============================================
-// CREATE ROLES PANEL - بحال الصورة بالضبط
+// CREATE ROLES PANEL
 // ============================================
 async function createRolesPanel(channel) {
     // الصورة المتحركة ديالك
-    const GIF_URL = "https://images-ext-1.discordapp.net/external/_LdcZiTLV-b3ppxLLcVRVN0qyjA1_ni8NDiAZpOTYHA/https/i.imgur.com/IAzRQrM.gif";
+    const GIF_URL = "https://images-ext-1.discordapp.net/external/_LdcZiTLV-b3ppxLLcVRVN0yjA1_ni8NDiAZpOTYHA/https/i.imgur.com/IAzRQrM.gif";
+    
+    // ترتيب الألعاب في نص الـ embed
+    const gameList = GAME_ROLES.map(game => `> @- ${game.name}`).join('\n');
     
     const embed = new EmbedBuilder()
         .setTitle("🎮 **GAME ROLES** ✨")
         .setDescription(
             `> **Do You Play Any Games?**\n\n` +
-            GAME_ROLES.map(game => `> @- ${game.name}`).join('\n')
+            gameList
         )
         .setColor(0x2b2d31)
         .setImage(GIF_URL)
         .setFooter({ text: "© 2026 BONBON. All rights reserved.", iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
 
-    // أزرار الألعاب (صفين - كل صف 3 أزرار)
-    const row1 = new ActionRowBuilder();
-    const row2 = new ActionRowBuilder();
+    // ترتيب الأزرار: 3 أزرار في كل صف
+    const rows = [];
     
-    // أول 3 ألعاب في الصف الأول
-    for (let i = 0; i < 3 && i < GAME_ROLES.length; i++) {
-        row1.addComponents(
-            new ButtonBuilder()
-                .setCustomId(`role_${GAME_ROLES[i].id}`)
-                .setLabel(GAME_ROLES[i].label)
-                .setEmoji(GAME_ROLES[i].emoji)
-                .setStyle(ButtonStyle.Secondary)
-        );
-    }
-    
-    // التانيين 3 ألعاب في الصف الثاني
-    for (let i = 3; i < 6 && i < GAME_ROLES.length; i++) {
-        row2.addComponents(
-            new ButtonBuilder()
-                .setCustomId(`role_${GAME_ROLES[i].id}`)
-                .setLabel(GAME_ROLES[i].label)
-                .setEmoji(GAME_ROLES[i].emoji)
-                .setStyle(ButtonStyle.Secondary)
-        );
+    for (let i = 0; i < GAME_ROLES.length; i += 3) {
+        const row = new ActionRowBuilder();
+        const gamesInRow = GAME_ROLES.slice(i, i + 3);
+        
+        for (const game of gamesInRow) {
+            row.addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`role_${game.id}`)
+                    .setLabel(game.label)
+                    .setEmoji(game.emoji)
+                    .setStyle(ButtonStyle.Secondary)
+            );
+        }
+        rows.push(row);
     }
 
-    await channel.send({ embeds: [embed], components: [row1, row2] });
+    await channel.send({ embeds: [embed], components: rows });
 }
 
 // ============================================
@@ -172,10 +198,10 @@ client.once('ready', async () => {
         return;
     }
 
-    console.log(`\n📊 Loading game roles...`);
+    console.log(`\n📊 Loading game roles (${GAME_ROLES.length} roles):`);
     for (const game of GAME_ROLES) {
         const role = guild.roles.cache.get(game.id);
-        console.log(`  ✓ ${game.name}: ${role ? role.name : '⚠️ Role not found'} (${game.id})`);
+        console.log(`  ${game.emoji} ${game.name}: ${role ? '✅' : '❌'} (${game.id})`);
     }
 
     // إنشاء البانيل في الشانل المحدد
